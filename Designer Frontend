@@ -1,0 +1,342 @@
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class Form1
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()>
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()>
+    Private Sub InitializeComponent()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.TxtAddress = New System.Windows.Forms.TextBox()
+        Me.TxtName = New System.Windows.Forms.TextBox()
+        Me.TxtDate = New System.Windows.Forms.TextBox()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Lno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PrdCd = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Unit_Price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TotalAmount = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.BtnNew = New System.Windows.Forms.Button()
+        Me.BtnModify = New System.Windows.Forms.Button()
+        Me.BtnDelete = New System.Windows.Forms.Button()
+        Me.BtnSave = New System.Windows.Forms.Button()
+        Me.BtnCancel = New System.Windows.Forms.Button()
+        Me.BtnPrint = New System.Windows.Forms.Button()
+        Me.BtnQuery = New System.Windows.Forms.Button()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(69, 86)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(129, 16)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Invoice No           :"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(74, 158)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(125, 16)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Customer Code  :"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(76, 180)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(124, 16)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Name                  :"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(75, 202)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(125, 16)
+        Me.Label4.TabIndex = 3
+        Me.Label4.Text = "Address              :"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(830, 86)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(52, 16)
+        Me.Label5.TabIndex = 4
+        Me.Label5.Text = "Date  :"
+        '
+        'TxtAddress
+        '
+        Me.TxtAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtAddress.Location = New System.Drawing.Point(219, 201)
+        Me.TxtAddress.Name = "TxtAddress"
+        Me.TxtAddress.Size = New System.Drawing.Size(266, 22)
+        Me.TxtAddress.TabIndex = 7
+        '
+        'TxtName
+        '
+        Me.TxtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtName.Location = New System.Drawing.Point(219, 179)
+        Me.TxtName.Name = "TxtName"
+        Me.TxtName.Size = New System.Drawing.Size(266, 22)
+        Me.TxtName.TabIndex = 8
+        '
+        'TxtDate
+        '
+        Me.TxtDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtDate.Location = New System.Drawing.Point(902, 83)
+        Me.TxtDate.Name = "TxtDate"
+        Me.TxtDate.Size = New System.Drawing.Size(100, 22)
+        Me.TxtDate.TabIndex = 9
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Lno, Me.PrdCd, Me.Description, Me.Unit_Price, Me.Qty, Me.Amount})
+        Me.DataGridView1.Location = New System.Drawing.Point(79, 254)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersWidth = 51
+        Me.DataGridView1.RowTemplate.Height = 24
+        Me.DataGridView1.Size = New System.Drawing.Size(1071, 145)
+        Me.DataGridView1.TabIndex = 10
+        '
+        'Lno
+        '
+        Me.Lno.HeaderText = "Lno"
+        Me.Lno.MinimumWidth = 6
+        Me.Lno.Name = "Lno"
+        Me.Lno.ReadOnly = True
+        Me.Lno.Width = 125
+        '
+        'PrdCd
+        '
+        Me.PrdCd.HeaderText = "Prd_Cd"
+        Me.PrdCd.MinimumWidth = 6
+        Me.PrdCd.Name = "PrdCd"
+        Me.PrdCd.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PrdCd.Width = 125
+        '
+        'Description
+        '
+        Me.Description.HeaderText = "Description"
+        Me.Description.MinimumWidth = 6
+        Me.Description.Name = "Description"
+        Me.Description.ReadOnly = True
+        Me.Description.Width = 125
+        '
+        'Unit_Price
+        '
+        Me.Unit_Price.HeaderText = "Unit_Price"
+        Me.Unit_Price.MinimumWidth = 6
+        Me.Unit_Price.Name = "Unit_Price"
+        Me.Unit_Price.Width = 125
+        '
+        'Qty
+        '
+        Me.Qty.HeaderText = "Qty"
+        Me.Qty.MinimumWidth = 6
+        Me.Qty.Name = "Qty"
+        Me.Qty.Width = 125
+        '
+        'Amount
+        '
+        Me.Amount.HeaderText = "Amount"
+        Me.Amount.MinimumWidth = 6
+        Me.Amount.Name = "Amount"
+        Me.Amount.ReadOnly = True
+        Me.Amount.Width = 125
+        '
+        'TotalAmount
+        '
+        Me.TotalAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TotalAmount.Location = New System.Drawing.Point(965, 399)
+        Me.TotalAmount.Name = "TotalAmount"
+        Me.TotalAmount.Size = New System.Drawing.Size(185, 22)
+        Me.TotalAmount.TabIndex = 11
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(841, 402)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(106, 16)
+        Me.Label6.TabIndex = 12
+        Me.Label6.Text = "Amount Total :"
+        '
+        'BtnNew
+        '
+        Me.BtnNew.Location = New System.Drawing.Point(83, 588)
+        Me.BtnNew.Name = "BtnNew"
+        Me.BtnNew.Size = New System.Drawing.Size(150, 23)
+        Me.BtnNew.TabIndex = 13
+        Me.BtnNew.Text = "New"
+        Me.BtnNew.UseVisualStyleBackColor = True
+        '
+        'BtnModify
+        '
+        Me.BtnModify.Location = New System.Drawing.Point(236, 588)
+        Me.BtnModify.Name = "BtnModify"
+        Me.BtnModify.Size = New System.Drawing.Size(150, 23)
+        Me.BtnModify.TabIndex = 14
+        Me.BtnModify.Text = "Modify"
+        Me.BtnModify.UseVisualStyleBackColor = True
+        '
+        'BtnDelete
+        '
+        Me.BtnDelete.Location = New System.Drawing.Point(389, 588)
+        Me.BtnDelete.Name = "BtnDelete"
+        Me.BtnDelete.Size = New System.Drawing.Size(150, 23)
+        Me.BtnDelete.TabIndex = 15
+        Me.BtnDelete.Text = "Delete"
+        Me.BtnDelete.UseVisualStyleBackColor = True
+        '
+        'BtnSave
+        '
+        Me.BtnSave.Location = New System.Drawing.Point(542, 588)
+        Me.BtnSave.Name = "BtnSave"
+        Me.BtnSave.Size = New System.Drawing.Size(150, 23)
+        Me.BtnSave.TabIndex = 16
+        Me.BtnSave.Text = "Save"
+        Me.BtnSave.UseVisualStyleBackColor = True
+        '
+        'BtnCancel
+        '
+        Me.BtnCancel.Location = New System.Drawing.Point(695, 588)
+        Me.BtnCancel.Name = "BtnCancel"
+        Me.BtnCancel.Size = New System.Drawing.Size(150, 23)
+        Me.BtnCancel.TabIndex = 17
+        Me.BtnCancel.Text = "Cancel"
+        Me.BtnCancel.UseVisualStyleBackColor = True
+        '
+        'BtnPrint
+        '
+        Me.BtnPrint.Location = New System.Drawing.Point(848, 588)
+        Me.BtnPrint.Name = "BtnPrint"
+        Me.BtnPrint.Size = New System.Drawing.Size(150, 23)
+        Me.BtnPrint.TabIndex = 18
+        Me.BtnPrint.Text = "Print"
+        Me.BtnPrint.UseVisualStyleBackColor = True
+        '
+        'BtnQuery
+        '
+        Me.BtnQuery.Location = New System.Drawing.Point(1001, 588)
+        Me.BtnQuery.Name = "BtnQuery"
+        Me.BtnQuery.Size = New System.Drawing.Size(150, 23)
+        Me.BtnQuery.TabIndex = 19
+        Me.BtnQuery.Text = "Query"
+        Me.BtnQuery.UseVisualStyleBackColor = True
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(219, 81)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(163, 24)
+        Me.ComboBox1.TabIndex = 20
+        Me.ComboBox1.SelectedIndex = -1
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(219, 155)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(266, 24)
+        Me.ComboBox2.TabIndex = 21
+        '
+        'Form1
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(1369, 694)
+        Me.Controls.Add(Me.ComboBox2)
+        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.BtnQuery)
+        Me.Controls.Add(Me.BtnPrint)
+        Me.Controls.Add(Me.BtnCancel)
+        Me.Controls.Add(Me.BtnSave)
+        Me.Controls.Add(Me.BtnDelete)
+        Me.Controls.Add(Me.BtnModify)
+        Me.Controls.Add(Me.BtnNew)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.TotalAmount)
+        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.TxtDate)
+        Me.Controls.Add(Me.TxtName)
+        Me.Controls.Add(Me.TxtAddress)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
+        Me.Name = "Form1"
+        Me.Text = "Form1"
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents TxtAddress As TextBox
+    Friend WithEvents TxtName As TextBox
+    Friend WithEvents TxtDate As TextBox
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents TotalAmount As TextBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents BtnNew As Button
+    Friend WithEvents BtnModify As Button
+    Friend WithEvents BtnDelete As Button
+    Friend WithEvents BtnSave As Button
+    Friend WithEvents BtnCancel As Button
+    Friend WithEvents BtnPrint As Button
+    Friend WithEvents BtnQuery As Button
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents Lno As DataGridViewTextBoxColumn
+    Friend WithEvents PrdCd As DataGridViewComboBoxColumn
+    Friend WithEvents Description As DataGridViewTextBoxColumn
+    Friend WithEvents Unit_Price As DataGridViewTextBoxColumn
+    Friend WithEvents Qty As DataGridViewTextBoxColumn
+    Friend WithEvents Amount As DataGridViewTextBoxColumn
+End Class
