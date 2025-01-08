@@ -1,0 +1,56 @@
+DB Schema
+
+-- Create Customer Table
+CREATE TABLE Customer (
+    Cust_Code VARCHAR(6) PRIMARY KEY,
+    Cust_Name VARCHAR(50) NOT NULL,
+    Cust_Add1 VARCHAR(50) NULL,
+    Cust_Add2 VARCHAR(50) NULL,
+    Cust_Phone VARCHAR(50) NULL
+);
+
+-- Insert Data into Customer Table
+INSERT INTO Customer
+VALUES
+    ('C01', 'Albin', 'Dubai', 'Al Nahda', '8289868952'),
+    ('C02', 'Mathew', 'Abu Dhabi', 'Al Ain', '9446269952'),
+    ('C03', 'Sona', 'Sharjah', NULL, '8956234789'),
+    ('C04', 'Jobin', 'Abu Dhabi', 'Al Ain', '8915627456'),
+    ('C05', 'Shilpa', 'Ajman', NULL, '6398756153');
+
+-- Create Product Table
+CREATE TABLE Product (
+    Prod_Code VARCHAR(6) PRIMARY KEY,
+    Prod_Name VARCHAR(50) NOT NULL,
+    Prod_Price DECIMAL(10,2) NOT NULL
+);
+
+-- Insert Data into Product Table
+INSERT INTO Product
+VALUES
+    ('P001', 'Laptop', 1500.500),
+    ('P002', 'Smartphone', 799.999),
+    ('P003', 'Tablet', 350.250),
+    ('P004', 'Headphones', 120.100),
+    ('P005', 'Smartwatch', 199.500);
+
+-- Create Inv_Header Table
+CREATE TABLE Inv_Header (
+    Inv_No INT IDENTITY(1,1) PRIMARY KEY,
+    Inv_Date DATETIME NOT NULL,
+    Inv_Cust VARCHAR(6) NOT NULL,
+    FOREIGN KEY(Inv_Cust) REFERENCES Customer(Cust_Code),
+    CONSTRAINT CHK_Inv_Date CHECK (Inv_Date <= GETDATE())
+);
+
+-- Create Inv_Detail Table
+CREATE TABLE Inv_Detail (
+    Inv_No INT,
+    Inv_Lno INT,
+    Inv_Prod VARCHAR(6) NOT NULL,
+    Inv_Qty DECIMAL(10,3) NOT NULL,
+    Inv_Price DECIMAL(15,3),
+    FOREIGN KEY(Inv_Prod) REFERENCES Product(Prod_Code),
+    FOREIGN KEY(Inv_No) REFERENCES Inv_Header(Inv_No),
+    CONSTRAINT PK_Inv_Detail PRIMARY KEY (Inv_No, Inv_Lno)
+);
