@@ -58,6 +58,7 @@ Public Class Form1
                 End While
             End Using
         End Using
+
     End Sub
 
     ' Populate product codes in the Product ComboBox
@@ -140,7 +141,7 @@ Public Class Form1
                 Dim unitPrice As Decimal = 0
 
                 If Not Decimal.TryParse(currentRow.Cells("Qty").Value?.ToString(), qty) OrElse Not Decimal.TryParse(currentRow.Cells("Unit_Price").Value?.ToString(), unitPrice) Then
-                    MessageBox.Show("Invalid quantity or unit price.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("Invalid quantity", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Return
                 End If
 
@@ -169,6 +170,7 @@ Public Class Form1
     ' Insert new invoice into the database
     Private Sub BtnNew_Click(sender As Object, e As EventArgs) Handles BtnNew.Click
         DataGridView1.Rows.Clear()
+        ComboBox1.SelectedIndex = -1
         ComboBox2.SelectedIndex = -1
         TxtName.Clear()
         TxtAddress.Clear()
@@ -247,7 +249,9 @@ Public Class Form1
 
         Try
             ' Fetch invoice details
-            Using Command As New SqlCommand("SELECT Inv_Lno, Inv_Prod, Inv_Qty, Inv_Price FROM Inv_Detail WHERE Inv_No = @Inv_No", Connection)
+            Using Command As New SqlCommand("Select  Inv_Lno,Inv_Prod,Prod_Name,Inv_Qty,Inv_Price From
+                                        Inv_Detail D Join Product P On D.Inv_Prod = P.Prod_Code
+                                        WHERE Inv_No = @Inv_No", Connection)
                 Command.Parameters.AddWithValue("@Inv_No", selectedInvNo)
                 Using Reader As SqlDataReader = Command.ExecuteReader()
                     DataGridView1.Rows.Clear()
@@ -255,29 +259,22 @@ Public Class Form1
                         Dim rowIndex As Integer = DataGridView1.Rows.Add()
                         DataGridView1.Rows(rowIndex).Cells("Lno").Value = Reader("Inv_Lno")
                         DataGridView1.Rows(rowIndex).Cells("PrdCd").Value = Reader("Inv_Prod")
+                        DataGridView1.Rows(rowIndex).Cells("Description").Value = Reader("Prod_Name")
                         DataGridView1.Rows(rowIndex).Cells("Qty").Value = Reader("Inv_Qty")
                         DataGridView1.Rows(rowIndex).Cells("Unit_Price").Value = Reader("Inv_Price")
                         DataGridView1.Rows(rowIndex).Cells("Amount").Value = Convert.ToDecimal(Reader("Inv_Qty")) * Convert.ToDecimal(Reader("Inv_Price"))
 
                         ' Fetch and display product details
-                        FetchProductDetails(Reader("Inv_Prod").ToString(), rowIndex)
+                        ' FetchProductDetails(Reader("Inv_Prod").ToString(), rowIndex)
                     End While
                 End Using
+
             End Using
 
-            ' Fetch and display customer details for the selected invoice
-            Using Command As New SqlCommand("SELECT Inv_Cust FROM Inv_Header WHERE Inv_No = @Inv_No", Connection)
-                Command.Parameters.AddWithValue("@Inv_No", selectedInvNo)
-                Using Reader As SqlDataReader = Command.ExecuteReader()
-                    If Reader.Read() Then
-                        Dim custCode As String = Reader("Inv_Cust").ToString()
-                        ComboBox2.SelectedItem = custCode
-                    End If
-                End Using
-            End Using
+
 
             ' Fetch and display customer details
-            FetchCustomerDetails(ComboBox2.SelectedItem.ToString())
+            ' LoadCustomerDetails(selectedInvNo)
 
             UpdateTotalAmount()
             SetEditMode(False)
@@ -287,29 +284,43 @@ Public Class Form1
     End Sub
 
     ' Fetch product details and update DataGridView row
-    Private Sub FetchProductDetails(prodCode As String, rowIndex As Integer)
-        Using Command As New SqlCommand("SELECT Prod_Name, Prod_Price FROM dbo.Product WHERE Prod_Code = @Prod_Code", Connection)
-            Command.Parameters.AddWithValue("@Prod_Code", prodCode)
-            Using Reader As SqlDataReader = Command.ExecuteReader()
-                If Reader.Read() Then
-                    DataGridView1.Rows(rowIndex).Cells("Description").Value = Reader("Prod_Name").ToString()
-                    DataGridView1.Rows(rowIndex).Cells("Unit_Price").Value = Reader("Prod_Price").ToString()
-                End If
-            End Using
+    Private Sub LoadProductDetails(Inv_No As String, rowIndex As Integer)
+
+        Using Command As New SqlCommand("Select  Inv_Lno,Inv_Prod,Prod_Name,Inv_Qty,Inv_Price From
+                                        Inv_Detail D Join Product P On D.Inv_Prod = P.Prod_Code
+                                        WHERE Inv_No = @Inv_No", Connection)
+            Command.Parameters.AddWithValue("@Inv_No", Inv_No)
+            Dim adapter As New SqlDataAdapter(Command)
+            ' Create a data table to hold the data
+            Dim dataTable As New DataTable()
+            adapter.Fill(dataTable)
+
+            ' Bind the data table to the DataGridView
+            DataGridView1.DataSource = dataTable
+
+
         End Using
+        UpdateTotalAmount()
+        SetEditMode(False)
     End Sub
 
     ' Fetch customer details and update TextBoxes
-    Private Sub FetchCustomerDetails(custCode As String)
-        Using Command As New SqlCommand("SELECT Cust_Name, Cust_Add1 FROM Customer WHERE Cust_Code = @CustCode", Connection)
-            Command.Parameters.AddWithValue("@CustCode", custCode)
+    Private Sub LoadCustomerDetails(Inv_No As String)
+
+        Using Command As New SqlCommand("Select  Inv_Cust,Cust_Name,Cust_Add1
+                                         From Inv_Header H
+                                         Join Customer C On C.Cust_Code = H.Inv_Cust
+                                          Where Inv_No=@Inv_No", Connection)
+            Command.Parameters.AddWithValue("@Inv_No", Inv_No)
             Using Reader As SqlDataReader = Command.ExecuteReader()
                 If Reader.Read() Then
+                    ComboBox2.SelectedItem = Reader("Inv_Cust").ToString()
                     TxtName.Text = Reader("Cust_Name").ToString()
                     TxtAddress.Text = Reader("Cust_Add1").ToString()
                 End If
             End Using
         End Using
+
     End Sub
 
     ' Load selected invoice details for editing
@@ -319,9 +330,12 @@ Public Class Form1
 
     ' Set the edit mode for the form
     Private Sub SetEditMode(isEditable As Boolean)
+        ComboBox1.Enabled = Not isEditable
         DataGridView1.ReadOnly = Not isEditable
         ComboBox2.Enabled = isEditable
         TxtDate.Enabled = isEditable
+        TxtName.Enabled = Not isEditable
+        TxtAddress.Enabled = Not isEditable
 
         BtnNew.Visible = Not isEditable
         BtnModify.Visible = Not isEditable
@@ -344,6 +358,7 @@ Public Class Form1
                 DataGridView1.Columns.Remove("Delete")
             End If
         End If
+
     End Sub
 
     ' Handle delete button click in DataGridView
@@ -370,22 +385,29 @@ Public Class Form1
 
     ' Query button to display the customer with maximum sales in the last 6 months
     Private Sub BtnQuery_Click(sender As Object, e As EventArgs) Handles BtnQuery.Click
-        Using Command As New SqlCommand("SELECT TOP 1 C.Cust_Name, SUM(D.Inv_Price * D.Inv_Qty) AS TotalSales " &
-                                        "FROM Inv_Header H " &
-                                        "JOIN Inv_Detail D ON H.Inv_No = D.Inv_No " &
-                                        "JOIN Customer C ON H.Inv_Cust = C.Cust_Code " &
-                                        "WHERE H.Inv_Date >= DATEADD(MONTH, -6, GETDATE()) " &
-                                        "GROUP BY C.Cust_Name " &
-                                        "ORDER BY TotalSales DESC", Connection)
-            Using Reader As SqlDataReader = Command.ExecuteReader()
-                If Reader.Read() Then
-                    MessageBox.Show("Customer with Maximum Sales in Last 6 Months: " & Reader("Cust_Name").ToString() & vbCrLf &
-                                    "Total Sales: " & Convert.ToDecimal(Reader("TotalSales")).ToString("F2"), "Query Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Else
-                    MessageBox.Show("No sales data found for the last 6 months.", "Query Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                End If
+        Try
+            ' Using the stored procedure instead of an inline query
+            Using Command As New SqlCommand("GetTopCustomerSales", Connection)
+                Command.CommandType = CommandType.StoredProcedure
+
+                ' Execute the command
+                Using Reader As SqlDataReader = Command.ExecuteReader()
+                    If Reader.Read() Then
+                        ' Display the result
+                        MessageBox.Show("Customer with Maximum Sales in Last 6 Months: " & Reader("Cust_Name").ToString() & vbCrLf &
+                                    "Total Sales: " & Convert.ToDecimal(Reader("TotalSales")).ToString("F2"),
+                                    "Query Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Else
+                        MessageBox.Show("No sales data found for the last 6 months.", "Query Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                End Using
             End Using
-        End Using
+        Catch ex As Exception
+            ' Handle exceptions
+            MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            '  Finally
+
+        End Try
     End Sub
 
 End Class
