@@ -54,3 +54,18 @@ CREATE TABLE Inv_Detail (
     FOREIGN KEY(Inv_No) REFERENCES Inv_Header(Inv_No),
     CONSTRAINT PK_Inv_Detail PRIMARY KEY (Inv_No, Inv_Lno)
 );
+
+-- SP
+Create PROCEDURE GetTopCustomerSales
+AS
+BEGIN
+    SELECT TOP 1
+        C.Cust_Name, 
+        SUM(D.Inv_Price * D.Inv_Qty) AS TotalSales
+    FROM Inv_Header H
+    JOIN Inv_Detail D ON H.Inv_No = D.Inv_No
+    JOIN Customer C ON H.Inv_Cust = C.Cust_Code
+    WHERE H.Inv_Date >= DATEADD(MONTH, -6, GETDATE())
+    GROUP BY C.Cust_Name
+    ORDER BY TotalSales DESC
+END
